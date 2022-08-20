@@ -1,2 +1,6 @@
-name,number,time,date
-IsaacLee,1234,22:30:4,8/19/2022
+name,number,time,date,logon
+OliviaKim,6969,23:44:11,8/19/2022,False
+OliviaKim,6969,23:45:1,8/19/2022,True
+OliviaKim,6969,23:46:57,8/19/2022,False
+IsaacLee,1234,23:47:17,8/19/2022,True
+IsaacLee,1234,23:47:27,8/19/2022,False
