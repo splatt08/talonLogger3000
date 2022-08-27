@@ -23,6 +23,8 @@ def logger3000(_scan_num, _logged_on_users):
 
     if write:
         # check if user logged 
+        if name == 'Admin':
+            return(["Admin", "AAF5CF23", "null", "null", "False", _logged_on_users])
         if name in _logged_on_users:
             _logged_on_users.remove(name)
             logon = 'False'
