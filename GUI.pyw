@@ -20,6 +20,8 @@ assert clf.open('tty:USB0:pn532') is True
 target = clf.sense(RemoteTarget('106A'), RemoteTarget('106B'), RemoteTarget('212F'))
 
 #setup pygame window
+pygame_icon = pygame.image.load(r'assets/TalonLoggericon.png')
+pygame.display.set_icon(pygame_icon)
 screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 pygame.display.set_caption('Talon Logger 3000')
 screen.fill((227, 227, 227))
