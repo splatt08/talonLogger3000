@@ -23,12 +23,12 @@ target = clf.sense(RemoteTarget('106A'), RemoteTarget('106B'), RemoteTarget('212
 screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 pygame.display.set_caption('Talon Logger 3000')
 screen.fill((227, 227, 227))
-image = pygame.image.load(r'TalonLoggerLogo.png')
+image = pygame.image.load(r'assets/TalonLoggerLogo.png')
 image_rect = image.get_rect ()
 image_rect.center = (screen.get_width()/2, 0 + 100)
-font = pygame.font.Font(r'ValorantFont.ttf', 32)
-admin_font = pygame.font.Font(r'ValorantFont.ttf', 42)
-login_font = pygame.font.Font(r'ValorantFont.ttf', 42)
+font = pygame.font.Font(r'assets/ValorantFont.ttf', 32)
+admin_font = pygame.font.Font(r'assets/ValorantFont.ttf', 42)
+login_font = pygame.font.Font(r'assets/ValorantFont.ttf', 42)
 
 
 
