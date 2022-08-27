@@ -23,23 +23,27 @@ target = clf.sense(RemoteTarget('106A'), RemoteTarget('106B'), RemoteTarget('212
 screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 pygame.display.set_caption('Talon Logger 3000')
 screen.fill((227, 227, 227))
-image = pygame.image.load(r'frcLogo.png')
-font = pygame.font.Font(r'comicsansmsgras.ttf', 32)
-admin_font = pygame.font.Font(r'comicsansmsgras.ttf', 42)
-text = font.render('GeeksForGeeks', True, (0, 255, 0), (0, 0, 128))
-textRect = text.get_rect(center=(screen.get_width()/2, screen.get_height()/2))
+image = pygame.image.load(r'TalonLoggerLogo.png')
+image_rect = image.get_rect ()
+image_rect.center = (screen.get_width()/2, 0 + 100)
+font = pygame.font.Font(r'ValorantFont.ttf', 32)
+admin_font = pygame.font.Font(r'ValorantFont.ttf', 42)
+login_font = pygame.font.Font(r'ValorantFont.ttf', 42)
+
+
 
 
 running = True
 while running:
     # Did the user click the window close button?
-    screen.blit(image, (0, 0))
+    screen.blit(image, (image_rect.left, image_rect.top))
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
             pygame.quit()
             quit()
-    text = font.render('Please Tap Card', True, (0, 255, 0), (0, 0, 128))
+    text = login_font.render('Please Tap Card', True, (0, 255, 0), (0, 0, 128))
+    textRect = text.get_rect(center=(screen.get_width()/2, screen.get_height()/2))
     
     screen.blit(text, textRect)
     pygame.display.update()
@@ -59,7 +63,7 @@ while running:
     logger_data = logger3000(scan_num, logged_on_users)
     logged_on_users = logger_data[5]
     screen.fill((227, 227, 227))
-    screen.blit(image, (0, 0))
+    screen.blit(image, (image_rect.left, image_rect.top))
 
 
 
@@ -67,7 +71,7 @@ while running:
 
         screen.fill((227, 227, 227))
         admin_text = admin_font.render('Admin Panel', True, (0, 0, 0), (227, 227, 227))
-        admin_text_rect = admin_text.get_rect(center=(screen.get_width()/2, screen.get_height()/2-420))
+        admin_text_rect = admin_text.get_rect(center=(screen.get_width()/2, 100))
         screen.blit(admin_text, admin_text_rect)
         settings_button = font.render('Settings', True, (0, 0, 0), (227, 227, 227))
         settings_button_rect = settings_button.get_rect(center=(screen.get_width()/2, screen.get_height()/2-100))
@@ -109,14 +113,19 @@ while running:
                         cancel_button_rect = cancel_button.get_rect(center=(screen.get_width()/2, screen.get_height()/2+200))
                         screen.blit(cancel_button, cancel_button_rect)
                         manual_text = admin_font.render('Manual Login', True, (0, 0, 0), (227, 227, 227))
-                        manual_text_rect = admin_text.get_rect(center=(screen.get_width()/2, screen.get_height()/2-420))
+                        manual_text_rect = admin_text.get_rect(center=(screen.get_width()/2, 100))
                         screen.blit(manual_text, manual_text_rect)
+                        info = "Start Typing"
+                        block_a = font.render(info, True, (255, 255, 255))
+                        rect_a = block_a.get_rect()
+                        rect_a.center = screen.get_rect().center
+                        screen.blit(block_a, rect_a)
                         name = ""
 
 
                         while running_inside_inside:
                             manual_text = admin_font.render('Manual Login', True, (0, 0, 0), (227, 227, 227))
-                            manual_text_rect = admin_text.get_rect(center=(screen.get_width()/2, screen.get_height()/2-420))
+                            manual_text_rect = admin_text.get_rect(center=(screen.get_width()/2, 100))
                             screen.blit(manual_text, manual_text_rect)
                             for ev in pygame.event.get():
 
@@ -186,11 +195,11 @@ while running:
                     if settings_button_rect.collidepoint(pygame.mouse.get_pos()) & (ev.type == pygame.MOUSEBUTTONDOWN):
                         screen.fill((227, 227, 227))
                         running_inside_inside = True
-                        cancel_button = font.render('Cancel', True, (0, 0, 0), (227, 227, 227))
-                        cancel_button_rect = cancel_button.get_rect(center=(screen.get_width()/2, screen.get_height()/2+200))
-                        screen.blit(cancel_button, cancel_button_rect)
+                        done_button = font.render('Done', True, (0, 0, 0), (227, 227, 227))
+                        done_button_rect = done_button.get_rect(center=(screen.get_width()/2, screen.get_height()/2+200))
+                        screen.blit(done_button, done_button_rect)
                         settings_text = admin_font.render('Settings', True, (0, 0, 0), (227, 227, 227))
-                        settings_text_rect = settings_text.get_rect(center=(screen.get_width()/2, screen.get_height()/2-420))
+                        settings_text_rect = settings_text.get_rect(center=(screen.get_width()/2, 100))
                         screen.blit(settings_text, settings_text_rect)
                         name = ""
 
@@ -199,12 +208,12 @@ while running:
                             
                             for ev in pygame.event.get():
 
-                                if cancel_button_rect.collidepoint(pygame.mouse.get_pos()):
+                                if done_button_rect.collidepoint(pygame.mouse.get_pos()):
 
-                                    cancel_button = font.render('Cancel', True, (100, 100, 100), (227, 227, 227))
-                                    screen.blit(cancel_button, cancel_button_rect)
+                                    done_button = font.render('Done', True, (100, 100, 100), (227, 227, 227))
+                                    screen.blit(done_button, done_button_rect)
 
-                                    if cancel_button_rect.collidepoint(pygame.mouse.get_pos()) & (ev.type == pygame.MOUSEBUTTONDOWN):
+                                    if done_button_rect.collidepoint(pygame.mouse.get_pos()) & (ev.type == pygame.MOUSEBUTTONDOWN):
                                         screen.fill((227, 227, 227))
                                         running_inside_inside = False
                                         running_inside = False
@@ -212,8 +221,8 @@ while running:
                                         
 
                                 else:
-                                    cancel_button = font.render('Cancel', True, (0, 0, 0), (227, 227, 227))
-                                    screen.blit(cancel_button, cancel_button_rect)
+                                    done_button = font.render('Done', True, (0, 0, 0), (227, 227, 227))
+                                    screen.blit(done_button, done_button_rect)
                             pygame.display.update()
                 else:
                     settings_button = font.render('Settings', True, (0, 0, 0), (227, 227, 227))
@@ -225,25 +234,25 @@ while running:
 
 
     screen.fill((227, 227, 227))
-    screen.blit(image, (0, 0))
+    screen.blit(image, (image_rect.left, image_rect.top))
 
     if logger_data[1] != 'null':
         
         if logger_data[4] == "True":
             print(logger_data[0] +  ' has been logged in')
-            logged_in_text = font.render(logger_data[0] +  ' has been logged in', True, (0, 255, 0), (0, 0, 128))
+            logged_in_text = admin_font.render(logger_data[0] +  ' has been logged in', True, (0, 255, 0), (0, 0, 128))
             logged_in_text_rect = logged_in_text.get_rect(center=(screen.get_width()/2, screen.get_height()/2))
             screen.blit(logged_in_text, logged_in_text_rect)
         
         else:
             print(logger_data[0] + ' has been logged out')
-            logged_out_text = font.render(logger_data[0] +  ' has been logged out', True, (0, 255, 0), (0, 0, 128))
+            logged_out_text = admin_font.render(logger_data[0] +  ' has been logged out', True, (0, 255, 0), (0, 0, 128))
             logged_out_text_rect = logged_out_text.get_rect(center=(screen.get_width()/2, screen.get_height()/2))
             screen.blit(logged_out_text, logged_out_text_rect)
     
     else:
         print('ERROR!')
-        error_text = font.render(logger_data[0] +  ' has been logged out', True, (0, 255, 0), (0, 0, 128))
+        error_text = admin_font.render(logger_data[0] +  ' has been logged out', True, (0, 255, 0), (0, 0, 128))
         error_text_rect = error_text.get_rect(center=(screen.get_width()/2, screen.get_height()/2))
         screen.blit(error_text, error_text_rect)
     pygame.display.update()
