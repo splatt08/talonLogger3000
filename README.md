@@ -1,9 +1,12 @@
 # talonLogger3000
- FRC 5411 hours logging system.
+ FRC 5411 hours logging system.  Only supported on linux currently.
 
 
 
 required dependencies:
-pip install pysimplegui
-pip install pythonw
-(probably more, just forgot to write them down)
+
+pygame
+
+nfclib
+
+csv library
