@@ -31,8 +31,10 @@ image_rect.center = (screen.get_width()/2, 0 + 100)
 font = pygame.font.Font(r'assets/ValorantFont.ttf', 32)
 admin_font = pygame.font.Font(r'assets/ValorantFont.ttf', 42)
 login_font = pygame.font.Font(r'assets/ValorantFont.ttf', 42)
-
-
+success_sound = pygame.mixer.Sound(r'assets/login.wav')
+error_sound = pygame.mixer.Sound(r'assets/logout.wav')
+rick = False
+superior_font = False
 
 
 running = True
@@ -197,6 +199,18 @@ while running:
                     if settings_button_rect.collidepoint(pygame.mouse.get_pos()) & (ev.type == pygame.MOUSEBUTTONDOWN):
                         screen.fill((227, 227, 227))
                         running_inside_inside = True
+                        if superior_font:
+                            superior_font_button = font.render('Superior Font (x)', True, (0, 0, 0), (227, 227, 227))
+                        else:
+                            superior_font_button = font.render('Superior Font ( )', True, (0, 0, 0), (227, 227, 227))
+                        superior_font_button_rect = superior_font_button.get_rect(center=(screen.get_width()/2, screen.get_height()/2+0))
+                        screen.blit(superior_font_button, superior_font_button_rect)
+                        if rick:
+                            rick_button = font.render('Rick (x)', True, (0, 0, 0), (227, 227, 227))
+                        else:
+                            rick_button = font.render('Rick ( )', True, (0, 0, 0), (227, 227, 227))
+                        rick_button_rect = rick_button.get_rect(center=(screen.get_width()/2, screen.get_height()/2+100))
+                        screen.blit(rick_button, rick_button_rect)
                         done_button = font.render('Done', True, (0, 0, 0), (227, 227, 227))
                         done_button_rect = done_button.get_rect(center=(screen.get_width()/2, screen.get_height()/2+200))
                         screen.blit(done_button, done_button_rect)
@@ -209,6 +223,70 @@ while running:
                         while running_inside_inside:
                             
                             for ev in pygame.event.get():
+                                
+                                if superior_font_button_rect.collidepoint(pygame.mouse.get_pos()):
+
+                                    if superior_font:
+                                        superior_font_button = font.render('Superior Font (x)', True, (100, 100, 100), (227, 227, 227))
+                                    else:
+                                        superior_font_button = font.render('Superior Font ( )', True, (100, 100, 100), (227, 227, 227))
+                                    screen.blit(superior_font_button, superior_font_button_rect)
+
+                                    if superior_font_button_rect.collidepoint(pygame.mouse.get_pos()) & (ev.type == pygame.MOUSEBUTTONDOWN):
+                                        
+                                        if superior_font:
+                                            superior_font = not superior_font
+                                            font = pygame.font.Font(r'assets/ValorantFont.ttf', 32)
+                                            admin_font = pygame.font.Font(r'assets/ValorantFont.ttf', 42)
+                                            login_font = pygame.font.Font(r'assets/ValorantFont.ttf', 42)
+                                            superior_font_button = font.render('Superior Font (x)', True, (100, 100, 100), (227, 227, 227))
+                                            
+
+                                        else:
+                                            superior_font = not superior_font
+                                            font = pygame.font.Font(r'assets/comicsans.ttf', 32)
+                                            admin_font = pygame.font.Font(r'assets/comicsans.ttf', 42)
+                                            login_font = pygame.font.Font(r'assets/comicsans.ttf', 42)
+                                            superior_font_button = font.render('Superior Font ( )', True, (100, 100, 100), (227, 227, 227))
+                                        screen.fill((227, 227, 227))
+                                        screen.blit(superior_font_button, superior_font_button_rect)
+                                        settings_text = admin_font.render('Settings', True, (0, 0, 0), (227, 227, 227))
+                                        settings_text_rect = settings_text.get_rect(center=(screen.get_width()/2, 100))
+                                        screen.blit(settings_text, settings_text_rect)
+                                        
+
+                                else:
+                                    if superior_font:
+                                        superior_font_button = font.render('Superior Font (x)', True, (0, 0, 0), (227, 227, 227))
+                                    else:
+                                        superior_font_button = font.render('Superior Font ( )', True, (0, 0, 0), (227, 227, 227))
+                                    screen.blit(superior_font_button, superior_font_button_rect)
+
+                                
+                                if rick_button_rect.collidepoint(pygame.mouse.get_pos()):
+
+                                    if rick:
+                                        rick_button = font.render('Rick (x)', True, (100, 100, 100), (227, 227, 227))
+                                    else:
+                                        rick_button = font.render('Rick ( )', True, (100, 100, 100), (227, 227, 227))
+                                    screen.blit(rick_button, rick_button_rect)
+
+                                    if rick_button_rect.collidepoint(pygame.mouse.get_pos()) & (ev.type == pygame.MOUSEBUTTONDOWN):
+                                        screen.fill((227, 227, 227))
+                                        rick = not rick
+                                        if rick:
+                                            rick_button = font.render('Rick (x)', True, (100, 100, 100), (227, 227, 227))
+                                        else:
+                                            rick_button = font.render('Rick ( )', True, (100, 100, 100), (227, 227, 227))
+                                        screen.blit(rick_button, rick_button_rect)
+                                        
+
+                                else:
+                                    if rick:
+                                        rick_button = font.render('Rick (x)', True, (0, 0, 0), (227, 227, 227))
+                                    else:
+                                        rick_button = font.render('Rick ( )', True, (0, 0, 0), (227, 227, 227))
+                                    screen.blit(rick_button, rick_button_rect)
 
                                 if done_button_rect.collidepoint(pygame.mouse.get_pos()):
 
@@ -225,6 +303,8 @@ while running:
                                 else:
                                     done_button = font.render('Done', True, (0, 0, 0), (227, 227, 227))
                                     screen.blit(done_button, done_button_rect)
+                            settings_text_rect = settings_text.get_rect(center=(screen.get_width()/2, 100))
+                            screen.blit(settings_text, settings_text_rect)
                             pygame.display.update()
                 else:
                     settings_button = font.render('Settings', True, (0, 0, 0), (227, 227, 227))
@@ -239,24 +319,34 @@ while running:
     screen.blit(image, (image_rect.left, image_rect.top))
 
     if logger_data[1] != 'null':
-        
+        if rick:
+            success_sound = pygame.mixer.Sound(r'assets/rick.wav')
+        else:
+            success_sound = pygame.mixer.Sound(r'assets/login.wav')
         if logger_data[4] == "True":
             print(logger_data[0] +  ' has been logged in')
             logged_in_text = admin_font.render(logger_data[0] +  ' has been logged in', True, (0, 255, 0), (0, 0, 128))
             logged_in_text_rect = logged_in_text.get_rect(center=(screen.get_width()/2, screen.get_height()/2))
             screen.blit(logged_in_text, logged_in_text_rect)
+            pygame.mixer.Sound.play(success_sound)
+            pygame.mixer.music.stop()
         
         else:
             print(logger_data[0] + ' has been logged out')
             logged_out_text = admin_font.render(logger_data[0] +  ' has been logged out', True, (0, 255, 0), (0, 0, 128))
             logged_out_text_rect = logged_out_text.get_rect(center=(screen.get_width()/2, screen.get_height()/2))
             screen.blit(logged_out_text, logged_out_text_rect)
+            pygame.mixer.Sound.play(success_sound)
+            pygame.mixer.music.stop()
     
     else:
+        print(scan_num)
         print('ERROR!')
         error_text = admin_font.render(logger_data[0] +  ' has been logged out', True, (0, 255, 0), (0, 0, 128))
         error_text_rect = error_text.get_rect(center=(screen.get_width()/2, screen.get_height()/2))
         screen.blit(error_text, error_text_rect)
+        pygame.mixer.Sound.play(error_sound)
+        pygame.mixer.music.stop()
     pygame.display.update()
     time.sleep(2) 
     screen.fill((227, 227, 227))
